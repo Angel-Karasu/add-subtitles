@@ -1,3 +1,12 @@
+var default_settings = {
+    subtitle_offset: 0,
+    subtitle_offset_top: -10,
+    subtitle_font_size: 26,
+    subtitle_font_color: "rgba(255, 255, 255, 1)",
+    subtitle_background_color: "rgba(0, 0, 0, 0.7)",
+    subtitle_font: "Arial"
+};
+
 (function(){
 
 if(window.has_run){
@@ -71,6 +80,7 @@ menu.innerHTML = `
 <div class="line">
     Background color: <input type="text" id="subtitle_background_color" value="rgba(0, 0, 0, 0.7)">
 </div>
+<button id="save_button">Save</button>
 `;
 shadow.appendChild(menu);
 
@@ -473,6 +483,35 @@ shadow_root.getElementById("make_video_fullscreen").addEventListener("click", fu
 
 shadow_root.getElementById("close_button").addEventListener("click", function(){
     menu.style.display = "none";
+});
+
+shadow_root.getElementById("save_button").addEventListener("click", () => {
+    chrome.storage.sync.remove([
+        "subtitle_offset",
+        "subtitle_offset_top",
+        "subtitle_font_size",
+        "subtitle_font_color",
+        "subtitle_background_color",
+        "subtitle_font"
+    ]);
+
+    chrome.storage.sync.set({
+        subtitle_offset: shadow_root.getElementById("subtitle_offset_input").value,
+        subtitle_offset_top: shadow_root.getElementById("subtitle_offset_top_input").value,
+        subtitle_font_size: shadow_root.getElementById("subtitle_font_size").value,
+        subtitle_font_color: shadow_root.getElementById("subtitle_font_color").value,
+        subtitle_background_color: shadow_root.getElementById("subtitle_background_color").value,
+        subtitle_font: shadow_root.getElementById("subtitle_font").value
+    });
+});
+
+chrome.storage.sync.get(default_settings, function (storage) {    
+    shadow_root.getElementById("subtitle_offset_input").value = storage.subtitle_offset;
+    shadow_root.getElementById("subtitle_offset_top_input").value = storage.subtitle_offset_top;
+    shadow_root.getElementById("subtitle_font_size").value = storage.subtitle_font_size;
+    shadow_root.getElementById("subtitle_font_color").value = storage.subtitle_font_color;
+    shadow_root.getElementById("subtitle_background_color").value = storage.subtitle_background_color;
+    shadow_root.getElementById("subtitle_font").value = storage.subtitle_font;
 });
 
 })();
