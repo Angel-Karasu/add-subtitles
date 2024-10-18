@@ -496,8 +496,8 @@ shadow_root.getElementById("save_button").addEventListener("click", () => {
     ]);
 
     chrome.storage.sync.set({
-        subtitle_offset: shadow_root.getElementById("subtitle_offset_input").value,
-        subtitle_offset_top: shadow_root.getElementById("subtitle_offset_top_input").value,
+        subtitle_offset: parseFloat(shadow_root.getElementById("subtitle_offset_input").value),
+        subtitle_offset_top: parseFloat(shadow_root.getElementById("subtitle_offset_top_input").value),
         subtitle_font_size: shadow_root.getElementById("subtitle_font_size").value,
         subtitle_font_color: shadow_root.getElementById("subtitle_font_color").value,
         subtitle_background_color: shadow_root.getElementById("subtitle_background_color").value,
