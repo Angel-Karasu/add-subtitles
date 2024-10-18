@@ -505,13 +505,19 @@ shadow_root.getElementById("save_button").addEventListener("click", () => {
     });
 });
 
-chrome.storage.sync.get(default_settings, function (storage) {    
+chrome.storage.sync.get(default_settings, function (storage) {
     shadow_root.getElementById("subtitle_offset_input").value = storage.subtitle_offset;
+    subtitle_offset = storage.subtitle_offset;
     shadow_root.getElementById("subtitle_offset_top_input").value = storage.subtitle_offset_top;
+    subtitle_offset_top = storage.subtitle_offset_top;
     shadow_root.getElementById("subtitle_font_size").value = storage.subtitle_font_size;
+    subtitle_font_size = storage.subtitle_font_size;
     shadow_root.getElementById("subtitle_font_color").value = storage.subtitle_font_color;
+    subtitle_font_color = storage.subtitle_font_color;
     shadow_root.getElementById("subtitle_background_color").value = storage.subtitle_background_color;
+    subtitle_background_color = storage.subtitle_background_color;
     shadow_root.getElementById("subtitle_font").value = storage.subtitle_font;
+    subtitle_font = storage.subtitle_font;
 });
 
 })();
